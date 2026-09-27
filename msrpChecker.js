@@ -68,7 +68,7 @@ async function fetchPage(url, retries = 3) {
         timeout: 25000,
         // Decompress gzip/br automatically
         decompress: true,
-      });
+      }); console.log('[MSRP DEBUG] Response length:', typeof res.data === 'string' ? res.data.length : 'not a string', '| Has product links:', typeof res.data === 'string' && res.data.includes('/product/'), '| Has NEXT_DATA:', typeof res.data === 'string' && res.data.includes('__NEXT_DATA__'));
       return res.data;
     } catch (err) {
       lastErr = err;
