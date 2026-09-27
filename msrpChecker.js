@@ -69,6 +69,7 @@ async function fetchPage(url, retries = 3) {
         // Decompress gzip/br automatically
         decompress: true,
       }); console.log('[MSRP DEBUG] Response length:', typeof res.data === 'string' ? res.data.length : 'not a string', '| Has product links:', typeof res.data === 'string' && res.data.includes('/product/'), '| Has NEXT_DATA:', typeof res.data === 'string' && res.data.includes('__NEXT_DATA__'));
+      console.log('[MSRP DEBUG] Page title:', typeof res.data === 'string' ? (res.data.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || 'No title found') : 'Response is not a string');
       return res.data;
     } catch (err) {
       lastErr = err;
