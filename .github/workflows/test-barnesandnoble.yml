@@ -25,4 +25,4 @@ jobs:
         run: npm ci --prefer-offline
 
       - name: Test Barnes & Noble scraper
-        run: node scrapers/barnesandnoble.js --all
+       run: node scrapers/barnesandnoble.js --json
