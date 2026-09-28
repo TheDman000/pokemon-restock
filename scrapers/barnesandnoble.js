@@ -174,6 +174,10 @@ function isTcgProduct(raw) {
     'dvd',
     'blu-ray',
     'calendar'
+    'video genre'
+    'cards to invest in'
+    'how to find a worthwhile card'
+    'volumes 1-'
   ];
 
   if (nonTcgSignals.some(signal => title.includes(signal))) {
