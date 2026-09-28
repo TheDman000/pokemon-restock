@@ -173,10 +173,10 @@ function isTcgProduct(raw) {
     'video game',
     'dvd',
     'blu-ray',
-    'calendar'
-    'video genre'
-    'cards to invest in'
-    'how to find a worthwhile card'
+    'calendar',
+    'video genre',
+    'cards to invest in',
+    'how to find a worthwhile card',
     'volumes 1-'
   ];
 
