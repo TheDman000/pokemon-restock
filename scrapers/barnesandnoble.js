@@ -125,13 +125,68 @@ function isTcgProduct(raw) {
   const title = (raw?.product?.title ?? '').toLowerCase();
   const categories = (raw?.product?.categories ?? []).join(' ').toLowerCase();
 
-  // B&N also sells Pokemon manga, novels, and art books — exclude those
-  if (categories.includes('books') || categories.includes('media')) {
-    // Allow it only if the title strongly suggests a TCG product
-    const tcgSignals = ['trading card', 'booster', 'elite trainer', 'etb', ' tin', 'collection box', 'starter deck', 'battle deck', 'blister', 'theme deck'];
-    return tcgSignals.some(s => title.includes(s));
+  // Must actually be Pokemon.
+  if (!title.includes('pokemon') && !title.includes('pokémon')) {
+    return false;
   }
-  return true;
+
+  // Strong signals that this is a physical Pokemon TCG product.
+  const tcgSignals = [
+    'trading card',
+    'booster pack',
+    'booster bundle',
+    'booster box',
+    'elite trainer box',
+    'etb',
+    'sleeved booster',
+    'collection box',
+    'collector chest',
+    'tin',
+    'blister',
+    'starter deck',
+    'theme deck',
+    'battle deck',
+    'ex box',
+    'ex collection',
+    'premium collection',
+    'poster collection',
+    'binder collection',
+    'tech sticker collection',
+    'build & battle',
+    'build and battle'
+  ];
+
+  const hasTcgSignal = tcgSignals.some(signal => title.includes(signal));
+
+  // Reject obvious non-TCG merchandise unless the title has a strong
+  // TCG-product signal.
+  const nonTcgSignals = [
+    'figure',
+    'figurine',
+    'plush',
+    'manga',
+    'novel',
+    'handbook',
+    'guidebook',
+    'coloring book',
+    'activity book',
+    'video game',
+    'dvd',
+    'blu-ray',
+    'calendar'
+  ];
+
+  if (nonTcgSignals.some(signal => title.includes(signal))) {
+    return false;
+  }
+
+  // B&N book/media categories need positive TCG evidence.
+  if (categories.includes('books') || categories.includes('media')) {
+    return hasTcgSignal;
+  }
+
+  // For every other category, require positive TCG evidence too.
+  return hasTcgSignal;
 }
 
 function extractEan(raw) {
