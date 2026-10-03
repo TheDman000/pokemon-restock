@@ -70,33 +70,49 @@ const BASE_HEADERS = {
 async function fetchKeyword(keyword) {
   return withRetry(
     async () => {
-      const res = await axios.get(SEARCH_API, {
+      const res = await axios.get('https://www.barnesandnoble.com/search.data', {
         params: {
-          q:                         keyword,
-          'resources[type]':         'product',
-          'resources[limit]':        RESULTS_PER_CALL,
-          'section-id':              'predictive-search',
+          q: keyword,
         },
         headers: BASE_HEADERS,
         timeout: 20000,
       });
-      return res.data?.results ?? [];
+
+      const body =
+        typeof res.data === 'string'
+          ? res.data
+          : JSON.stringify(res.data);
+
+      console.log(
+        `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
+      );
+
+      return [];
     },
     {
       maxAttempts: MAX_RETRIES,
       baseDelayMs: 1500,
       isRetryable(err) {
         const status = err.response?.status;
-        return status === 429 || !status || status >= 500 || err.code === 'ECONNRESET' || err.code === 'ETIMEDOUT';
+        return (
+          status === 429 ||
+          !status ||
+          status >= 500 ||
+          err.code === 'ECONNRESET'
+        );
       },
       getDelay(err, attempt, baseDelayMs) {
-        if (err.response?.status === 429) return 5000 * (2 ** (attempt - 1));
+        if (err.response?.status === 429) {
+          return 5000 * (2 ** (attempt - 1));
+        }
         return baseDelayMs * (2 ** (attempt - 1));
       },
       onRetry(err, attempt, delayMs) {
-        console.warn(`[B&N] Attempt ${attempt} failed (${err.message}) — retrying in ${delayMs / 1000}s…`);
+        console.warn(
+          `[B&N] Attempt ${attempt} failed (${err.message}) → retrying in ${delayMs}ms`
+        );
       },
-    },
+    }
   );
 }
 
