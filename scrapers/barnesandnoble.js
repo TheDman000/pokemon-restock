@@ -83,11 +83,16 @@ async function fetchKeyword(keyword) {
           ? res.data
           : JSON.stringify(res.data);
 
-      console.log(
-        `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
-      );
+ console.log(
+  `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
+);
 
-      return [];
+console.log(
+  `[B&N SEARCH SAMPLE] "${keyword}":`,
+  body.slice(0, 5000)
+);
+
+return [];
     },
     {
       maxAttempts: MAX_RETRIES,
