@@ -24,5 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline
 
-      - name: Test Barnes & Noble scraper
-            run: node scrapers/barnesandnoble.js --json
+          - name: Test Barnes & Noble scraper
+        run: |
+          node scrapers/barnesandnoble.js --json
