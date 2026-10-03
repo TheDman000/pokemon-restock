@@ -261,6 +261,8 @@ async function scrapeBarnesAndNoble() {
     for (const raw of results) {
       const shopifyId = raw.id;
       const name      = raw?.product?.title ?? '';
+      
+      console.log('[B&N DEBUG RAW]', JSON.stringify(raw, null, 2));
 
       if (!shopifyId || !isPokemonProduct(name)) { skipCount++; continue; }
 
