@@ -89,7 +89,7 @@ async function fetchKeyword(keyword) {
 
 console.log(
   `[B&N SEARCH SAMPLE] "${keyword}":`,
-  body.slice(0, 5000)
+  body.slice(-10000)
 );
 
 return [];
