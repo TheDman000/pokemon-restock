@@ -88,11 +88,13 @@ async function fetchKeyword(keyword) {
 );
 
 const probes = [
-  'elite trainer',
-  'booster',
-  'trading card',
-  'diamond',
-  'price',
+  'productDisplayOptions',
+  'customRetailSearchBlocksKeywordQuery',
+  'searchResults',
+  'productCard',
+  'productGrid',
+  'totalResults',
+  '290',
 ];
 
 for (const probe of probes) {
