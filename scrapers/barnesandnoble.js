@@ -87,10 +87,27 @@ async function fetchKeyword(keyword) {
   `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
 );
 
-console.log(
-  `[B&N SEARCH SAMPLE] "${keyword}":`,
-  body.slice(-10000)
-);
+const probes = [
+  'elite trainer',
+  'booster',
+  'trading card',
+  'diamond',
+  'price',
+];
+
+for (const probe of probes) {
+  const index = body.toLowerCase().indexOf(probe);
+
+  console.log(
+    `[B&N PROBE] "${keyword}" / "${probe}": index=${index}`
+  );
+
+  if (index !== -1) {
+    console.log(
+      body.slice(Math.max(0, index - 1000), index + 3000)
+    );
+  }
+}
 
 return [];
     },
