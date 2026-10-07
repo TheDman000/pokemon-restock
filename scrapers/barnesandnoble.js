@@ -88,21 +88,8 @@ async function fetchKeyword(keyword) {
 );
 
 
+return res.data;
 
- const productId = '8864054673649';
-const idIndex = body.indexOf(productId);
-
-console.log(
-  `[B&N PRODUCT RECORD] "${keyword}" productId=${productId} index=${idIndex}`
-);
-
-if (idIndex !== -1) {
-  console.log(
-    body.slice(Math.max(0, idIndex - 2500), idIndex + 6000)
-  );
-}
-
-return [];
     },
     {
       maxAttempts: MAX_RETRIES,
