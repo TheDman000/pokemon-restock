@@ -137,7 +137,7 @@ function isPokemonProduct(name) {
 function isTcgProduct(raw) {
   const title = (raw?.product?.title ?? '').toLowerCase();
   const categories = (raw?.product?.categories ?? []).join(' ').toLowerCase();
-  const description = (raw?.product?.description ?? '').toLowerCase();
+ 
   // Must actually be Pokemon.
   if (!title.includes('pokemon') && !title.includes('pokémon')) {
     return false;
@@ -169,9 +169,7 @@ function isTcgProduct(raw) {
     'build and battle'
   ];
 
- const hasTcgSignal = tcgSignals.some(
-  signal => title.includes(signal) || description.includes(signal)
-);
+  const hasTcgSignal = tcgSignals.some(signal => title.includes(signal));
 
   // Reject obvious non-TCG merchandise unless the title has a strong
   // TCG-product signal.
