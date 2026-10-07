@@ -100,7 +100,14 @@ try {
   console.log(
     `[B&N JSON PARSE] "${keyword}" failed: ${err.message}`
   );
+const match = err.message.match(/position (\d+)/);
+const pos = match ? Number(match[1]) : 35721;
 
+console.log(
+  `[B&N JSON CONTEXT] "${keyword}" pos=${pos}: ${JSON.stringify(
+    res.data.slice(Math.max(0, pos - 150), pos + 150)
+  )}`
+);
   return [];
 }
 
