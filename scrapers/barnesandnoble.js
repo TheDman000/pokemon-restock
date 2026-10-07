@@ -70,7 +70,7 @@ const BASE_HEADERS = {
 async function fetchKeyword(keyword) {
   return withRetry(
     async () => {
-      const res = await axios.get('https://www.barnesandnoble.com/search.data', {
+      const res = await axios.get(SEARCH_API, {
         params: {
           q: keyword,
         },
