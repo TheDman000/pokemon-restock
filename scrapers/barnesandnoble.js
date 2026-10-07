@@ -83,7 +83,7 @@ console.log(
   `[B&N PREDICTIVE] "${keyword}" type=${Array.isArray(res.data) ? 'array' : typeof res.data} keys=${res.data && typeof res.data === 'object' ? Object.keys(res.data).join(',') : 'n/a'}`
 );
 
-return [];
+return Array.isArray(res.data?.results) ? res.data.results : [];
 
     },
     {
