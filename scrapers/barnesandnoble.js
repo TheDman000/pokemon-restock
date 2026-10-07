@@ -88,7 +88,21 @@ async function fetchKeyword(keyword) {
 );
 
 
-return res.data;
+try {
+  const parsed = JSON.parse(res.data);
+
+  console.log(
+    `[B&N JSON PARSE] "${keyword}" success type=${Array.isArray(parsed) ? 'array' : typeof parsed}`
+  );
+
+  return [];
+} catch (err) {
+  console.log(
+    `[B&N JSON PARSE] "${keyword}" failed: ${err.message}`
+  );
+
+  return [];
+}
 
     },
     {
