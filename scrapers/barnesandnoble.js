@@ -78,38 +78,12 @@ async function fetchKeyword(keyword) {
         timeout: 20000,
       });
 
-      const body =
-        typeof res.data === 'string'
-          ? res.data
-          : JSON.stringify(res.data);
-
- console.log(
-  `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
-);
-
-
-try {
-  const parsed = JSON.parse(res.data);
-
-  console.log(
-    `[B&N JSON PARSE] "${keyword}" success type=${Array.isArray(parsed) ? 'array' : typeof parsed}`
-  );
-
-  return [];
-} catch (err) {
-  console.log(
-    `[B&N JSON PARSE] "${keyword}" failed: ${err.message}`
-  );
-const match = err.message.match(/position (\d+)/);
-const pos = match ? Number(match[1]) : 35721;
-
+      
 console.log(
-  `[B&N JSON CONTEXT] "${keyword}" pos=${pos}: ${JSON.stringify(
-    res.data.slice(Math.max(0, pos - 150), pos + 150)
-  )}`
+  `[B&N PREDICTIVE] "${keyword}" type=${Array.isArray(res.data) ? 'array' : typeof res.data} keys=${res.data && typeof res.data === 'object' ? Object.keys(res.data).join(',') : 'n/a'}`
 );
-  return [];
-}
+
+return [];
 
     },
     {
