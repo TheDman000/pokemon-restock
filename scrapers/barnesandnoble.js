@@ -87,28 +87,19 @@ async function fetchKeyword(keyword) {
   `[B&N SEARCH.DATA] "${keyword}" response length: ${body.length}`
 );
 
-const probes = [
-  'Adventures Gold',
-  'Silver Box Set',
-  'Set Includes Vols',
-  'Shigekatsu',
-  '84.99',
-  '/w/',
-];
 
 
-for (const probe of probes) {
-  const index = body.toLowerCase().indexOf(probe);
+ const productId = '8864054673649';
+const idIndex = body.indexOf(productId);
 
+console.log(
+  `[B&N PRODUCT RECORD] "${keyword}" productId=${productId} index=${idIndex}`
+);
+
+if (idIndex !== -1) {
   console.log(
-    `[B&N PROBE] "${keyword}" / "${probe}": index=${index}`
+    body.slice(Math.max(0, idIndex - 2500), idIndex + 6000)
   );
-
-  if (index !== -1) {
-    console.log(
-      body.slice(Math.max(0, index - 1000), index + 3000)
-    );
-  }
 }
 
 return [];
