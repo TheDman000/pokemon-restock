@@ -88,14 +88,14 @@ async function fetchKeyword(keyword) {
 );
 
 const probes = [
-  'productDisplayOptions',
-  'customRetailSearchBlocksKeywordQuery',
-  'searchResults',
-  'productCard',
-  'productGrid',
-  'totalResults',
-  '290',
+  'Adventures Gold',
+  'Silver Box Set',
+  'Set Includes Vols',
+  'Shigekatsu',
+  '84.99',
+  '/w/',
 ];
+
 
 for (const probe of probes) {
   const index = body.toLowerCase().indexOf(probe);
